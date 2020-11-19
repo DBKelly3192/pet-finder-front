@@ -21,7 +21,7 @@ export default class NewPetForm extends Component {
   }
 
   handleSubmit = (event) => {
-    this.preventDefault()
+    event.preventDefault()
 
     this.props.createPet(this.state)
 
@@ -58,9 +58,9 @@ export default class NewPetForm extends Component {
           <Label>Date Lost or Found:</Label>
           <Form.Input
             type="text"
-            name="email"
-            value={ this.state.email }
-            placeholder="Enter an email address."
+            name="dateLost"
+            value={ this.state.dateLost }
+            placeholder="Enter the date the pet was either lost or found."
             onChange={ this.handleChange }
           />
           <Label>Pet Description:</Label>

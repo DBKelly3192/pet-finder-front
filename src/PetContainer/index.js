@@ -36,7 +36,7 @@ export default class PetContainer extends Component {
 
   createPet = async (petToAdd) => {
     try {
-      const url = process.env.API_URL + '/api/v1/pets/'
+      const url = process.env.API_URL + '/api/v1/pets'
       const createPetResponse = await fetch(url, {
         method: 'POST',
         headers: {
