@@ -11,7 +11,7 @@ export default class PetContainer extends Component {
     }
   }
 
-  createUser = (userToAdd) => {
+  createUser = async (userToAdd) => {
     try {
       const url = process.env.API_URL + '/api/v1/users/register/'
       const createUserResponse = await fetch(url, {
@@ -30,7 +30,7 @@ export default class PetContainer extends Component {
     }
   }
 
-  createPet = (petToAdd) => {
+  createPet = async (petToAdd) => {
     try {
       const url = process.env.API_URL + '/api/v1/pets/'
       const createUserResponse = await fetch(url, {
