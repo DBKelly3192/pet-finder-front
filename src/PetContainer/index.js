@@ -33,7 +33,7 @@ export default class PetContainer extends Component {
   createPet = async (petToAdd) => {
     try {
       const url = process.env.API_URL + '/api/v1/pets/'
-      const createUserResponse = await fetch(url, {
+      const createPetResponse = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export default class PetContainer extends Component {
       const createPetJson = await createPetResponse.json()
       if (createPetResponse.status === 200 || createPetResponse.status === 201) {
         this.setState({
-          pets: [...this.state.pets, createDogJson.data]
+          pets: [...this.state.pets, createPetJson.data]
         })
         console.log('PET CREATED')
       }

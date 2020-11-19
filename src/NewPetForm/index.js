@@ -63,7 +63,7 @@ export default class NewPetForm extends Component {
             placeholder="Enter an email address."
             onChange={ this.handleChange }
           />
-          <Label>Pet Description:</LabeL>
+          <Label>Pet Description:</Label>
           <Form.Input
             control='textarea'
             name="aboutPet"
