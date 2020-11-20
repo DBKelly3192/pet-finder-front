@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NewUserForm from '../NewUserForm'
 import NewPetForm from '../NewPetForm'
+import LoginUserForm from '../LoginUserForm'
 import PetCard from '../PetCard'
 
 export default class PetContainer extends Component {
@@ -37,7 +38,8 @@ export default class PetContainer extends Component {
 
   createPet = async (petToAdd) => {
     try {
-      const url = process.env.API_URL + '/api/v1/pets'
+      // const url = process.env.API_URL + '/api/v1/pets'
+      const url = 'http://localhost:8000/api/v1/pets/'
       const createPetResponse = await fetch(url, {
         method: 'POST',
         headers: {
@@ -58,10 +60,42 @@ export default class PetContainer extends Component {
     }
   }
 
+  loginUser = async (userToLogin) => {
+    console.log(userToLogin)
+    try {
+      const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
+      // const url = 'http://localhost:8000/api/v1/users/login/'
+
+      console.log(url)
+      console.log(JSON.stringify(userToLogin))
+
+      const loginUserResponse = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(userToLogin),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log(loginUserResponse)
+
+      const loginUserJson = await loginUserResponse.json()
+
+      console.log(loginUserJson)
+
+      if (loginUserResponse.status === 200 || loginUserResponse.status === 201) {
+        console.log('USER LOGGED IN')
+      }
+    } catch(err) {
+      console.log('ERROR LOGGING IN', err)
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
-        <NewUserForm createUser={ this.createUser }/>
+        <LoginUserForm loginUser={ this.loginUser } />
+        <NewUserForm createUser={ this.createUser } />
         <NewPetForm createPet={ this.createPet } />
         <PetCard name="Timofey" description="Very social, had on a tagged collar." zip="30309" image="https://i.imgur.com/bJfRyEI.jpg" />
       </React.Fragment>
