@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NewUserForm from '../NewUserForm'
 import NewPetForm from '../NewPetForm'
+import PetCard from '../PetCard'
 
 export default class PetContainer extends Component {
   constructor(props) {
@@ -62,6 +63,7 @@ export default class PetContainer extends Component {
       <React.Fragment>
         <NewUserForm createUser={ this.createUser }/>
         <NewPetForm createPet={ this.createPet } />
+        <PetCard name="Timofey" description="Very social, had on a tagged collar." zip="30309" image="https://i.imgur.com/bJfRyEI.jpg" />
       </React.Fragment>
     )
   }
