@@ -37,9 +37,15 @@ export default class PetContainer extends Component {
   }
 
   createPet = async (petToAdd) => {
+
+    console.log(petToAdd)
+
     try {
-      // const url = process.env.API_URL + '/api/v1/pets'
-      const url = 'http://localhost:8000/api/v1/pets/'
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/'
+      // const url = 'http://localhost:8000/api/v1/pets/'
+
+      console.log(url)
+
       const createPetResponse = await fetch(url, {
         method: 'POST',
         headers: {
@@ -48,7 +54,13 @@ export default class PetContainer extends Component {
         credentials: 'include',
         body: JSON.stringify(petToAdd)
       })
+
+      console.log(createPetResponse)
+
       const createPetJson = await createPetResponse.json()
+
+      console.log(createPetJson)
+
       if (createPetResponse.status === 200 || createPetResponse.status === 201) {
         this.setState({
           pets: [...this.state.pets, createPetJson.data]
