@@ -39,10 +39,11 @@ export default class Nav extends Component {
         {
           this.props.loggedIn
           ?
-          <React.Fragment>
-            <Button size='massive' onClick={ this.toggleCreatePetForm }>Create Pet Listing</Button>
-            <Button size='massive' onClick={ this.props.logoutUser }>Logout User</Button>
-          </React.Fragment>
+            <React.Fragment>
+              <Button size='massive' onClick={ this.props.getMyPets }>Show My Pet Listings</Button>
+              <Button size='massive' onClick={ this.toggleCreatePetForm }>Create Pet Listing</Button>
+              <Button size='massive' onClick={ this.props.logoutUser }>Logout User</Button>
+            </React.Fragment>
           :
             <React.Fragment>
               <Button size='massive' onClick={ this.toggleLoginUserForm }>Login</Button>
