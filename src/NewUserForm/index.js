@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Label, Segment } from 'semantic-ui-react'
+import { Button, Form, Header, Image, Input, Label, Modal } from 'semantic-ui-react'
 
 export default class NewUserForm extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export default class NewUserForm extends Component {
     event.preventDefault()
 
     this.props.createUser(this.state)
+    this.props.toggleRegisterForm()
 
     this.setState({
       username: '',
@@ -34,44 +35,61 @@ export default class NewUserForm extends Component {
 
   render() {
     return (
-      <Segment>
-        <h3>Register New User</h3>
-        <Form onSubmit= { this.handleSubmit }>
-          <Label>Username:</Label>
-          <Form.Input
-            type="text"
-            name="username"
-            value={ this.state.username }
-            placeholder="Enter a Username"
-            onChange={ this.handleChange }
+      <Modal
+        as={ Form }
+        open={ this.props.displayRegisterForm }
+        onSubmit={ this.handleSubmit }
+      >
+        <Modal.Header>Register New User</Modal.Header>
+        <Modal.Content image>
+          <Image size="medium" src="https://t4.ftcdn.net/jpg/02/11/73/73/360_F_211737333_nxBcIVfrybNy6nRiewn9Ynh20UJQCfSp.jpg" wrapped />
+          <Modal.Description>
+            <Header>Enter your information</Header>
+            <Label>Username:</Label>
+            <Input
+              type="text"
+              name="username"
+              value={ this.state.username }
+              placeholder="Enter a Username"
+              onChange={ this.handleChange }
+            />
+            <Label>Email:</Label>
+            <Input
+              type="text"
+              name="email"
+              value={ this.state.email }
+              placeholder="Enter an Email"
+              onChange={ this.handleChange }
+            />
+            <Label>Phone Number:</Label>
+            <Input
+              type="text"
+              name="phone"
+              value={ this.state.phone }
+              placeholder="Enter a Phone Number"
+              onChange={ this.handleChange }
+            />
+            <Label>Password:</Label>
+            <Input
+              type="text"
+              name="password"
+              value={ this.state.password }
+              placeholder="Enter a Password"
+              onChange={ this.handleChange }
+            />
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color='black' onClick={ this.props.toggleRegisterForm }>Cancel</Button>
+          <Button
+            content="Login"
+            labelPosition="right"
+            icon="checkmark"
+            type="Submit"
+            positive
           />
-          <Label>Email:</Label>
-          <Form.Input
-            type="text"
-            name="email"
-            value={ this.state.email }
-            placeholder="Enter an Email"
-            onChange={ this.handleChange }
-          />
-          <Label>Phone Number:</Label>
-          <Form.Input
-            type="text"
-            name="phone"
-            value={ this.state.phone }
-            placeholder="Enter a Phone Number"
-            onChange={ this.handleChange }
-          />
-          <Label>Password:</Label>
-          <Form.Input
-            type="text"
-            name="password"
-            value={ this.state.password }
-            placeholder="Enter a Password"
-            onChange={ this.handleChange }
-          />
-          <Button type="Submit">Register User</Button>
-        </Form>
-      </Segment>
+        </Modal.Actions>
+      </Modal>
     )
   }
 }

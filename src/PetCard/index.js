@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
-import { Card, Image, Segment } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
-export default class PetCard extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default function PetCard(props) {
 
-    render() {
-        return (
-            <Segment>
-                <Card>
-                    <Image src={this.props.image} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>{this.props.name}</Card.Header>
-                        <Card.Meta>Missing in {this.props.zip}</Card.Meta>
-                        <Card.Description>
-                            {this.props.description}
-                      </Card.Description>
-                    </Card.Content>
-                </Card>
-            </Segment>
-        )
-    }
+  const pets = props.pets.map(pet => {
+    return (
+      <Card>
+        <Image src={ pet.photo } wrapped ui={ false } />
+        <Card.Content>
+          <Card.Header>{ pet.petName }</Card.Header>
+          <Card.Meta>Missing in { pet.zipCode }</Card.Meta>
+          <Card.Description>{ pet.aboutPet }</Card.Description>
+        </Card.Content>
+      </Card>
+    )
+  })
+
+  return (
+    <Card.Group centered={ true }>
+      { pets }
+    </Card.Group>
+  )
 }
