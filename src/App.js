@@ -79,7 +79,8 @@ export default class App extends Component {
         body: JSON.stringify(userToLogin),
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       })
 
       console.log(loginUserResponse)
@@ -100,6 +101,41 @@ export default class App extends Component {
     }
   }
 
+  createPet = async (petToCreate) => {
+    console.log(petToCreate)
+    try {
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/'
+
+      console.log(url)
+      console.log(JSON.stringify(petToCreate))
+
+      const createPetResponse = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(petToCreate),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+
+      console.log(createPetResponse)
+
+      const createPetJson = await createPetResponse.json()
+
+      console.log(createPetJson)
+
+      if (createPetResponse.status === 200 || createPetResponse.status === 201) {
+        console.log('PET CREATED')
+        this.setState({
+          pets: [...this.state.pets, createPetJson.data]
+        })
+      }
+      this.getPets()
+    } catch(err) {
+      console.log('ERROR CREATING PET', err)
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -107,6 +143,7 @@ export default class App extends Component {
           loggedIn={ this.state.loggedIn }
           createUser={ this.createUser }
           loginUser={ this.loginUser }
+          createPet={ this.createPet }
         />
         <Body pets={ this.state.pets } loggedIn={ this.state.loggedIn }/>
       </React.Fragment>
