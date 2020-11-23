@@ -101,6 +101,32 @@ export default class App extends Component {
     }
   }
 
+  logoutUser = async () => {
+    try {
+      const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
+
+      console.log(url)
+
+      const logoutResponse = await fetch(url, {
+        credentials: 'include'
+      })
+
+      console.log("logoutResponse", logoutResponse)
+
+      const logoutJson = await logoutResponse.json()
+
+      console.log("logoutJson", logoutJson)
+
+      if(logoutResponse.status === 200) {
+        this.setState({
+          loggedIn: !this.state.loggedIn
+        })
+      }
+    } catch(err) {
+      console.error("ERROR LOGGING OUT", err)
+    }
+  }
+
   createPet = async (petToCreate) => {
     console.log(petToCreate)
     try {
@@ -143,6 +169,7 @@ export default class App extends Component {
           loggedIn={ this.state.loggedIn }
           createUser={ this.createUser }
           loginUser={ this.loginUser }
+          logoutUser={ this.logoutUser }
           createPet={ this.createPet }
         />
         <Body pets={ this.state.pets } loggedIn={ this.state.loggedIn }/>
