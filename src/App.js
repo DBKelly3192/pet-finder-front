@@ -37,6 +37,28 @@ export default class App extends Component {
     }
   }
 
+  getMyPets = async () => {
+    try {
+
+      const url = process.env.REACT_APP_API_URL + "/api/v1/pets/"
+      // const url = "http://localhost:8000/api/v1/pets/"
+      console.log(url)
+
+      const petsResponse = await fetch(url, { credentials: 'include' })
+
+      const petsJson = await petsResponse.json()
+
+      this.setState({
+        pets: petsJson.data
+      })
+
+      console.log(this.state.pets)
+
+    } catch(err) {
+      console.log("Error getting dog data.", err)
+    }
+  }
+
   createUser = async (userToAdd) => {
 
     console.log(userToAdd)
@@ -171,6 +193,7 @@ export default class App extends Component {
           loginUser={ this.loginUser }
           logoutUser={ this.logoutUser }
           createPet={ this.createPet }
+          getMyPets={ this.getMyPets }
         />
         <Body pets={ this.state.pets } loggedIn={ this.state.loggedIn }/>
       </React.Fragment>
