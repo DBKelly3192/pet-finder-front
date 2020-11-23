@@ -20,6 +20,12 @@ export default class NewPetForm extends Component {
     })
   }
 
+  handleDropChange = (event, data) => {
+    this.setState({
+      status: data.value
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
 
@@ -35,6 +41,12 @@ export default class NewPetForm extends Component {
   }
 
   render() {
+
+    const statusOptions = [
+      { text: "Lost", value: "lost" },
+      { text: "Found", value: "found" }
+    ]
+
     return (
       <Segment>
         <h3>Create a New Lost or Found Pet Post</h3>
@@ -43,18 +55,17 @@ export default class NewPetForm extends Component {
           <Form.Input
             type="text"
             name="petName"
-            value={ this.state.petName }
+            value={ this.value }
             placeholder="Enter the name of the pet."
             onChange={ this.handleChange }
           />
           <Label>Is this a pet that you have lost, or a pet that you have found?</Label>
-          <Form.Field
+          <Form.Select
             name="status"
-            control="select"
-          >
-            <option value={ this.state.status } onChange={ this.handleChange }>Lost</option>
-            <option value={ this.state.status } onChange={ this.handleChange }>Found</option>
-          </Form.Field>
+            options={ statusOptions }
+            placeholder="Lost or Found"
+            onChange={ this.handleDropChange }
+          />
           <Label>Date Lost or Found:</Label>
           <Form.Input
             type="text"
