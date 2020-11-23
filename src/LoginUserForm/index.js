@@ -21,7 +21,7 @@ export default class LoginUserForm extends Component {
     event.preventDefault()
 
     this.props.loginUser(this.state)
-    this.props.toggleLoginForm()
+    this.props.toggleLoginUserForm()
 
     this.setState({
       email: '',
@@ -33,7 +33,7 @@ export default class LoginUserForm extends Component {
     return (
       <Modal
         as={ Form }
-        open={ this.props.displayLoginForm }
+        open={ this.props.displayLoginUserForm }
         onSubmit={ this.handleSubmit }
       >
         <Modal.Header>Login</Modal.Header>
@@ -60,7 +60,7 @@ export default class LoginUserForm extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={ this.props.toggleLoginForm }>Cancel</Button>
+          <Button color='black' onClick={ this.props.toggleLoginUserForm }>Cancel</Button>
           <Button
             content="Login"
             labelPosition="right"

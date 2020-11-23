@@ -23,7 +23,7 @@ export default class NewUserForm extends Component {
     event.preventDefault()
 
     this.props.createUser(this.state)
-    this.props.toggleRegisterForm()
+    this.props.toggleRegisterUserForm()
 
     this.setState({
       username: '',
@@ -37,7 +37,7 @@ export default class NewUserForm extends Component {
     return (
       <Modal
         as={ Form }
-        open={ this.props.displayRegisterForm }
+        open={ this.props.displayRegisterUserForm }
         onSubmit={ this.handleSubmit }
       >
         <Modal.Header>Register New User</Modal.Header>
@@ -80,7 +80,7 @@ export default class NewUserForm extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={ this.props.toggleRegisterForm }>Cancel</Button>
+          <Button color='black' onClick={ this.props.toggleRegisterUserForm }>Cancel</Button>
           <Button
             content="Login"
             labelPosition="right"
