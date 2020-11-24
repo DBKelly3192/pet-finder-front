@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
 
 export default function PetCard(props) {
 
   const pets = props.pets.map(pet => {
     return (
-      <Card>
+      <Card key={ pet.id } onClick={ () => props.getPet(pet.id) }>
         <Image src={ pet.photo } wrapped ui={ false } />
         <Card.Content>
           <Card.Header>{ pet.petName }</Card.Header>

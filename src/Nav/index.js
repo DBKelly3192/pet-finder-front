@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import LoginUserForm from '../LoginUserForm'
 import NewUserForm from '../NewUserForm'
 import NewPetForm from '../NewPetForm'
@@ -35,46 +35,46 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Menu pointing secondary>
         {
           this.props.loggedIn
-          ?
+            ?
             <React.Fragment>
-              <Button size='massive' onClick={ this.props.getMyPets }>Show My Pet Listings</Button>
-              <Button size='massive' onClick={ this.toggleCreatePetForm }>Create Pet Listing</Button>
-              <Button size='massive' onClick={ this.props.logoutUser }>Logout User</Button>
+              <Menu.Item icon='box' name='My Listings' onClick={this.props.getMyPets} />
+              <Menu.Item icon='paper plane outline' name='New Listing' onClick={this.toggleCreatePetForm} />
+              <Menu.Item icon='sign-out' name='Log Out' position='right' onClick={this.props.logoutUser} />
             </React.Fragment>
-          :
+            :
             <React.Fragment>
-              <Button size='massive' onClick={ this.toggleLoginUserForm }>Login</Button>
-              <Button size='massive' onClick={ this.toggleRegisterUserForm }>Register</Button>
+              <Menu.Item icon='sign-in' name='Log In' position='right' onClick={this.toggleLoginUserForm}/>
+              <Menu.Item icon='address card outline' name='Register' position='right' onClick={this.toggleRegisterUserForm}/>
             </React.Fragment>
         }
         {
           this.state.displayLoginUserForm
           && <LoginUserForm
-                loginUser={ this.props.loginUser }
-                toggleLoginUserForm={ this.toggleLoginUserForm }
-                displayLoginUserForm={ this.state.displayLoginUserForm }
-              />
+            loginUser={this.props.loginUser}
+            toggleLoginUserForm={this.toggleLoginUserForm}
+            displayLoginUserForm={this.state.displayLoginUserForm}
+          />
         }
         {
           this.state.displayRegisterUserForm
           && <NewUserForm
-                createUser={ this.props.createUser }
-                toggleRegisterUserForm={ this.toggleRegisterUserForm }
-                displayRegisterUserForm={ this.state.displayRegisterUserForm }
-              />
+            createUser={this.props.createUser}
+            toggleRegisterUserForm={this.toggleRegisterUserForm}
+            displayRegisterUserForm={this.state.displayRegisterUserForm}
+          />
         }
         {
           this.state.displayCreatePetForm
           && <NewPetForm
-                createPet={ this.props.createPet }
-                toggleCreatePetForm={ this.toggleCreatePetForm }
-                displayCreatePetForm={ this.state.displayCreatePetForm }
-              />
+            createPet={this.props.createPet}
+            toggleCreatePetForm={this.toggleCreatePetForm}
+            displayCreatePetForm={this.state.displayCreatePetForm}
+          />
         }
-      </React.Fragment>
+      </Menu>
     )
   }
 }
