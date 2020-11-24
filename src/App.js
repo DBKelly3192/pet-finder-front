@@ -191,7 +191,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className='App'>
         <Nav
           loggedIn={ this.state.loggedIn }
           createUser={ this.createUser }
@@ -205,7 +205,7 @@ export default class App extends Component {
           loggedIn={ this.state.loggedIn }
           editPet={ this.editPet }
         />
-      </React.Fragment>
+      </div>
     )
   }
 }
