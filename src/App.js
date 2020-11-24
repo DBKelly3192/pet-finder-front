@@ -184,6 +184,11 @@ export default class App extends Component {
     }
   }
 
+  editPet = async (petToEdit) => {
+    console.log('Hell Yeah!')
+    console.log('Pet to edit, ', petToEdit)
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -195,7 +200,11 @@ export default class App extends Component {
           createPet={ this.createPet }
           getMyPets={ this.getMyPets }
         />
-        <Body pets={ this.state.pets } loggedIn={ this.state.loggedIn }/>
+        <Body
+          pets={ this.state.pets }
+          loggedIn={ this.state.loggedIn }
+          editPet={ this.editPet }
+        />
       </React.Fragment>
     )
   }

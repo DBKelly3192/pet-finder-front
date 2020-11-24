@@ -3,6 +3,10 @@ import PetCard from '../PetCard'
 
 export default function PetContainer(props) {
   return (
-    <PetCard pets={ props.pets } loggedIn={ props.loggedIn } />
+    <PetCard
+      pets={ props.pets }
+      loggedIn={ props.loggedIn }
+      toggleEditPetForm={ props.toggleEditPetForm }
+    />
   )
 }

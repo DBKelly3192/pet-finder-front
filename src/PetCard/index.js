@@ -5,7 +5,7 @@ export default function PetCard(props) {
 
   const pets = props.pets.map(pet => {
     return (
-      <Card key={ pet.id }>
+      <Card key={ pet.id } onClick={ () => props.toggleEditPetForm(pet.id) }>
         <Image src={ pet.photo } wrapped ui={ false } />
         <Card.Content>
           <Card.Header>{ pet.petName }</Card.Header>

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { Button, Form, Header, Image, Label, Modal } from 'semantic-ui-react'
 
-export default class NewPetForm extends Component {
+export default class EditPetForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      petName: '',
-      aboutPet: '',
-      dateLost: '',
-      status: '',
-      photo: '',
-      zipCode: ''
+      petName: props.pets[props.petIdToEdit].petName,
+      aboutPet: props.pets[props.petIdToEdit].aboutPet,
+      dateLost: props.pets[props.petIdToEdit].dateLost,
+      status: props.pets[props.petIdToEdit].status,
+      photo: props.pets[props.petIdToEdit].photo,
+      zipCode: props.pets[props.petIdToEdit].zipCode
     }
   }
 
@@ -30,8 +30,8 @@ export default class NewPetForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    this.props.createPet(this.state)
-    this.props.toggleCreatePetForm()
+    this.props.editPet(this.state)
+    this.props.toggleEditPetForm()
 
     this.setState({
       petName: '',
@@ -53,10 +53,10 @@ export default class NewPetForm extends Component {
     return (
       <Modal
         as={ Form }
-        open={ this.props.displayCreatePetForm }
+        open={ this.props.displayEditPetForm }
         onSubmit={ this.handleSubmit }
       >
-        <Modal.Header>Create New Pet Listing</Modal.Header>
+        <Modal.Header>Edit Pet Listing</Modal.Header>
         <Modal.Content image>
           <Image size="medium" src="https://t4.ftcdn.net/jpg/02/11/73/73/360_F_211737333_nxBcIVfrybNy6nRiewn9Ynh20UJQCfSp.jpg" wrapped />
           <Modal.Description>
@@ -65,15 +65,13 @@ export default class NewPetForm extends Component {
               <Form.Input
                 type="text"
                 name="petName"
-                value={ this.value }
-                placeholder="Enter the name of the pet."
+                value={ this.state.petName }
                 onChange={ this.handleChange }
               />
               <Label>Is this a pet that you have lost, or a pet that you have found?</Label>
               <Form.Select
                 name="status"
                 options={ statusOptions }
-                placeholder="Lost or Found"
                 onChange={ this.handleDropChange }
               />
               <Label>Date Lost or Found:</Label>
@@ -81,7 +79,6 @@ export default class NewPetForm extends Component {
                 type="text"
                 name="dateLost"
                 value={ this.state.dateLost }
-                placeholder="Enter the date the pet was either lost or found."
                 onChange={ this.handleChange }
               />
               <Label>Zipcode:</Label>
@@ -89,7 +86,6 @@ export default class NewPetForm extends Component {
                 type="text"
                 name="zipCode"
                 value={ this.state.zipCode }
-                placeholder="Enter zipcode where the pet was lost/found."
                 onChange={ this.handleChange }
               />
               <Label>Pet Description:</Label>
@@ -98,7 +94,6 @@ export default class NewPetForm extends Component {
                 name="aboutPet"
                 rows='3'
                 value={ this.state.aboutPet }
-                placeholder="Enter a description of the pet."
                 onChange={ this.handleChange }
               />
               <Label>Picture URL:</Label>
@@ -106,13 +101,12 @@ export default class NewPetForm extends Component {
                 type="text"
                 name="photo"
                 value={ this.state.photo }
-                placeholder="Enter the URL of the picture."
                 onChange={ this.handleChange }
               />
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={ this.props.toggleCreatePetForm }>Cancel</Button>
+          <Button color='black' onClick={ this.props.toggleEditPetForm }>Cancel</Button>
           <Button
             content="Create Pet Listing"
             labelPosition="right"
