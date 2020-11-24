@@ -6,12 +6,12 @@ export default class EditPetForm extends Component {
     super(props)
 
     this.state = {
-      petName: props.pets[props.petIdToEdit].petName,
-      aboutPet: props.pets[props.petIdToEdit].aboutPet,
-      dateLost: props.pets[props.petIdToEdit].dateLost,
-      status: props.pets[props.petIdToEdit].status,
-      photo: props.pets[props.petIdToEdit].photo,
-      zipCode: props.pets[props.petIdToEdit].zipCode
+      petName: this.props.pets.petName,
+      aboutPet: this.props.pets.aboutPet,
+      dateLost: this.props.pets.dateLost,
+      status: this.props.pets.status,
+      photo: this.props.pets.photo,
+      zipCode: this.props.pets.zipCode
     }
   }
 
@@ -30,7 +30,7 @@ export default class EditPetForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    this.props.editPet(this.state)
+    this.props.updatePet(this.state)
     this.props.toggleEditPetForm()
 
     this.setState({
@@ -52,61 +52,61 @@ export default class EditPetForm extends Component {
 
     return (
       <Modal
-        as={ Form }
-        open={ this.props.displayEditPetForm }
-        onSubmit={ this.handleSubmit }
+        as={Form}
+        open={this.props.displayEditPetForm}
+        onSubmit={this.handleSubmit}
       >
-        <Modal.Header>Edit Pet Listing</Modal.Header>
+        <Modal.Header>Update Pet Listing</Modal.Header>
         <Modal.Content image>
           <Image size="medium" src="https://t4.ftcdn.net/jpg/02/11/73/73/360_F_211737333_nxBcIVfrybNy6nRiewn9Ynh20UJQCfSp.jpg" wrapped />
           <Modal.Description>
-            <Header>Enter Pet Listing Information</Header>
+            <Header>Update Pet Listing</Header>
             <Label>Pet Name:</Label>
               <Form.Input
                 type="text"
                 name="petName"
-                value={ this.state.petName }
-                onChange={ this.handleChange }
+                value={this.state.petName}
+                onChange={this.handleChange}
               />
               <Label>Is this a pet that you have lost, or a pet that you have found?</Label>
               <Form.Select
                 name="status"
-                options={ statusOptions }
-                onChange={ this.handleDropChange }
+                options={statusOptions}
+                onChange={this.handleDropChange}
               />
               <Label>Date Lost or Found:</Label>
               <Form.Input
                 type="text"
                 name="dateLost"
-                value={ this.state.dateLost }
-                onChange={ this.handleChange }
+                value={this.state.dateLost}
+                onChange={this.handleChange}
               />
               <Label>Zipcode:</Label>
               <Form.Input
                 type="text"
                 name="zipCode"
-                value={ this.state.zipCode }
-                onChange={ this.handleChange }
+                value={this.state.zipCode}
+                onChange={this.handleChange}
               />
               <Label>Pet Description:</Label>
               <Form.Input
                 control='textarea'
                 name="aboutPet"
                 rows='3'
-                value={ this.state.aboutPet }
-                onChange={ this.handleChange }
+                value={this.state.aboutPet}
+                onChange={this.handleChange}
               />
               <Label>Picture URL:</Label>
               <Form.Input
                 type="text"
                 name="photo"
-                value={ this.state.photo }
-                onChange={ this.handleChange }
+                value={this.state.photo}
+                onChange={this.handleChange}
               />
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={ this.props.toggleEditPetForm }>Cancel</Button>
+          <Button color='black' onClick={this.props.toggleEditPetForm}>Cancel</Button>
           <Button
             content="Create Pet Listing"
             labelPosition="right"

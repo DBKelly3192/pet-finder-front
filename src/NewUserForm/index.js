@@ -90,7 +90,9 @@ export default class NewUserForm extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={this.props.toggleRegisterUserForm}>Cancel</Button>
+          <Button
+            color='black'
+            onClick={this.props.toggleRegisterUserForm}>Cancel</Button>
           <Button
             content="Login"
             labelPosition="right"

@@ -52,9 +52,9 @@ export default class NewPetForm extends Component {
 
     return (
       <Modal
-        as={ Form }
-        open={ this.props.displayCreatePetForm }
-        onSubmit={ this.handleSubmit }
+        as={Form}
+        open={this.props.displayCreatePetForm}
+        onSubmit={this.handleSubmit}
       >
         <Modal.Header>Create New Pet Listing</Modal.Header>
         <Modal.Content image>
@@ -65,54 +65,56 @@ export default class NewPetForm extends Component {
               <Form.Input
                 type="text"
                 name="petName"
-                value={ this.value }
+                value={this.state.petName}
                 placeholder="Enter the name of the pet."
-                onChange={ this.handleChange }
+                onChange={this.handleChange}
               />
               <Label>Is this a pet that you have lost, or a pet that you have found?</Label>
               <Form.Select
                 name="status"
-                options={ statusOptions }
+                options={statusOptions}
                 placeholder="Lost or Found"
-                onChange={ this.handleDropChange }
+                onChange={this.handleDropChange}
               />
               <Label>Date Lost or Found:</Label>
               <Form.Input
                 type="text"
                 name="dateLost"
-                value={ this.state.dateLost }
+                value={this.state.dateLost}
                 placeholder="Enter the date the pet was either lost or found."
-                onChange={ this.handleChange }
+                onChange={this.handleChange}
               />
               <Label>Zipcode:</Label>
               <Form.Input
                 type="text"
                 name="zipCode"
-                value={ this.state.zipCode }
+                value={this.state.zipCode}
                 placeholder="Enter zipcode where the pet was lost/found."
-                onChange={ this.handleChange }
+                onChange={this.handleChange}
               />
               <Label>Pet Description:</Label>
               <Form.Input
                 control='textarea'
                 name="aboutPet"
                 rows='3'
-                value={ this.state.aboutPet }
+                value={this.state.aboutPet}
                 placeholder="Enter a description of the pet."
-                onChange={ this.handleChange }
+                onChange={this.handleChange}
               />
               <Label>Picture URL:</Label>
               <Form.Input
                 type="text"
                 name="photo"
-                value={ this.state.photo }
+                value={this.state.photo}
                 placeholder="Enter the URL of the picture."
-                onChange={ this.handleChange }
+                onChange={this.handleChange}
               />
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={ this.props.toggleCreatePetForm }>Cancel</Button>
+          <Button
+            color='black'
+            onClick={this.props.toggleCreatePetForm}>Cancel</Button>
           <Button
             content="Create Pet Listing"
             labelPosition="right"

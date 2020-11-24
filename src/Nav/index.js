@@ -40,14 +40,42 @@ export default class Nav extends Component {
           this.props.loggedIn
             ?
             <React.Fragment>
-              <Menu.Item icon='box' name='My Listings' onClick={this.props.getMyPets} />
-              <Menu.Item icon='paper plane outline' name='New Listing' onClick={this.toggleCreatePetForm} />
-              <Menu.Item icon='sign-out' name='Log Out' position='right' onClick={this.props.logoutUser} />
+              <Menu.Item
+                icon='box'
+                name='All Listings'
+                onClick={this.props.getPets}
+              />
+              <Menu.Item
+                icon='box'
+                name='My Listings'
+                onClick={this.props.getMyPets}
+              />
+              <Menu.Item
+                icon='paper plane outline'
+                name='New Listing'
+                position='right'
+                onClick={this.toggleCreatePetForm}
+              />
+              <Menu.Item
+                icon='sign-out'
+                name='Log Out'
+                position='right'
+                onClick={this.props.logoutUser}
+              />
             </React.Fragment>
             :
             <React.Fragment>
-              <Menu.Item icon='sign-in' name='Log In' position='right' onClick={this.toggleLoginUserForm}/>
-              <Menu.Item icon='address card outline' name='Register' onClick={this.toggleRegisterUserForm}/>
+              <Menu.Item
+                icon='sign-in'
+                name='Log In'
+                position='right'
+                onClick={this.toggleLoginUserForm}
+              />
+              <Menu.Item
+                icon='address card outline'
+                name='Register'
+                onClick={this.toggleRegisterUserForm}
+              />
             </React.Fragment>
         }
         {

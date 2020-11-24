@@ -66,7 +66,9 @@ export default class LoginUserForm extends Component {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='black' onClick={this.props.toggleLoginUserForm}>Cancel</Button>
+          <Button
+            color='black'
+            onClick={this.props.toggleLoginUserForm}>Cancel</Button>
           <Button
             content="Login"
             labelPosition="right"

@@ -11,89 +11,64 @@ export default class App extends Component {
       loggedIn: false,
       pets: [],
       showPet: false,
-      currentUserId: ''
+      currentUserId: '',
+      petIdToEdit: -1
     }
   }
 
   componentDidMount() {
+    this.getPets()
   }
 
   getPets = async () => {
     try {
-
-      const url = process.env.REACT_APP_API_URL + "/api/v1/pets/all"
-      // const url = "http://localhost:8000/api/v1/pets/"
-      console.log(url)
-
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/all'
       const petsResponse = await fetch(url)
-
       const petsJson = await petsResponse.json()
 
       this.setState({
-        pets: petsJson.data
+        pets: petsJson.data,
+        showPet: false
       })
-      console.log(this.state.pets)
-
     } catch(err) {
-      console.log("ERROR RETRIEVING PET DATA.", err)
+      console.log('ERROR RETRIEVING PET DATA.', err)
     }
   }
 
   getPet = async (idOfPet) => {
     try {
-
-      const url = process.env.REACT_APP_API_URL + "/api/v1/pets/" + idOfPet
-      // const url = "http://localhost:8000/api/v1/pets/"
-      console.log(url)
-
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/' + idOfPet
       const petResponse = await fetch(url)
-
       const petJson = await petResponse.json()
 
       this.setState({
         pets: petJson.data,
-        showPet: !this.state.showPet
+        showPet: !this.state.showPet,
+        petIdToEdit: petJson.data.id
       })
-
-      console.log(this.state.pets)
-
     } catch(err) {
-      console.log("ERROR RETRIEVING PET DATA.", err)
+      console.log('ERROR RETRIEVING PET DATA.', err)
     }
   }
 
   getMyPets = async () => {
     try {
-
-      const url = process.env.REACT_APP_API_URL + "/api/v1/pets/"
-      // const url = "http://localhost:8000/api/v1/pets/"
-      console.log(url)
-
-      const petsResponse = await fetch(url, { credentials: 'include' })
-
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/'
+      const petsResponse = await fetch(url, {credentials: 'include'})
       const petsJson = await petsResponse.json()
 
       this.setState({
         pets: petsJson.data,
-        showPet: !this.state.showPet
+        showPet: false
       })
-
-      console.log(this.state.pets)
-
     } catch(err) {
-      console.log("Error getting dog data.", err)
+      console.log('ERROR RETRIEVING PET DATA.', err)
     }
   }
 
   createUser = async (userToAdd) => {
-
-    console.log(userToAdd)
-
     try {
       const url = process.env.REACT_APP_API_URL + '/api/v1/users/register'
-
-      console.log(url)
-
       const createUserResponse = await fetch(url, {
         method: 'POST',
         headers: {
@@ -101,16 +76,13 @@ export default class App extends Component {
         },
         body: JSON.stringify(userToAdd)
       })
-
       const createUserJson = await createUserResponse.json()
 
-      console.log(createUserJson)
-
-      if (createUserResponse.status === 200 || createUserResponse.status === 201) {
-        console.log('CREATED USER', createUserJson.data)
+      if (createUserResponse.status === 200) {
+        console.log('CREATED USER', createUserJson)
       }
     } catch(err) {
-      console.log('ERROR CREATING USER', err)
+      console.log('ERROR CREATING USER.', err)
     }
   }
 
@@ -118,10 +90,6 @@ export default class App extends Component {
     console.log(userToLogin)
     try {
       const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
-
-      console.log(url)
-      console.log(JSON.stringify(userToLogin))
-
       const loginUserResponse = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(userToLogin),
@@ -130,15 +98,9 @@ export default class App extends Component {
         },
         credentials: 'include'
       })
-
-      console.log(loginUserResponse)
-
       const loginUserJson = await loginUserResponse.json()
 
-      console.log(loginUserJson)
-      console.log(loginUserJson.data.id)
-
-      if (loginUserResponse.status === 200 || loginUserResponse.status === 201) {
+      if (loginUserResponse.status === 200) {
         console.log('USER LOGGED IN')
         this.setState({
           loggedIn: !this.state.loggedIn,
@@ -147,44 +109,33 @@ export default class App extends Component {
       }
       this.getPets()
     } catch(err) {
-      console.log('ERROR LOGGING IN', err)
+      console.log('ERROR LOGGING IN.', err)
     }
   }
 
   logoutUser = async () => {
     try {
-      const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
-
-      console.log(url)
-
+      const url = process.env.REACT_APP_API_URL + '/api/v1/users/logout'
       const logoutResponse = await fetch(url, {
         credentials: 'include'
       })
-
-      console.log("logoutResponse", logoutResponse)
-
       const logoutJson = await logoutResponse.json()
 
-      console.log("logoutJson", logoutJson)
-
       if(logoutResponse.status === 200) {
+        console.log('USER LOGGED OUT.', logoutJson)
         this.setState({
-          loggedIn: !this.state.loggedIn
+          loggedIn: false
         })
       }
+      this.getPets()
     } catch(err) {
-      console.error("ERROR LOGGING OUT", err)
+      console.error('ERROR LOGGING OUT.', err)
     }
   }
 
   createPet = async (petToCreate) => {
-    console.log(petToCreate)
     try {
       const url = process.env.REACT_APP_API_URL + '/api/v1/pets/'
-
-      console.log(url)
-      console.log(JSON.stringify(petToCreate))
-
       const createPetResponse = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(petToCreate),
@@ -193,22 +144,65 @@ export default class App extends Component {
         },
         credentials: 'include'
       })
-
-      console.log(createPetResponse)
-
       const createPetJson = await createPetResponse.json()
 
-      console.log(createPetJson)
-
-      if (createPetResponse.status === 200 || createPetResponse.status === 201) {
-        console.log('PET CREATED')
+      if (createPetResponse.status === 200) {
+        console.log('PET CREATED.')
         this.setState({
           pets: [...this.state.pets, createPetJson.data]
         })
       }
       this.getMyPets()
     } catch(err) {
-      console.log('ERROR CREATING PET', err)
+      console.log('ERROR CREATING PET.', err)
+    }
+  }
+
+  updatePet = async (updatedPetInfo) => {
+    try {
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/' + this.state.petIdToEdit
+      const updatePetResponse = await fetch(url, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify(updatedPetInfo),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const updatePetJson = await updatePetResponse.json()
+
+      if(updatePetResponse.status === 200) {
+        console.log('PET UPDATED.')
+        this.setState({
+          pets: updatePetJson.data,
+          petIdToEdit: -1
+        })
+      }
+      this.getMyPets()
+    } catch(err) {
+      console.log('ERROR UPDATING PET.', err)
+    }
+  }
+
+  deletePet = async () => {
+    try {
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/' + this.state.petIdToEdit
+      const deletePetResponse = await fetch(url, {
+        credentials: 'include',
+        method: 'DELETE'
+      })
+      const deletePetJson = await deletePetResponse.json()
+
+      if(deletePetResponse.status === 200) {
+        console.log('PET DELETED.', deletePetJson)
+        this.setState({
+          pets: [],
+          showPet: false
+        })
+      }
+      this.getMyPets()
+    } catch(err) {
+      console.log('ERROR DELETING PET.', err)
     }
   }
 
@@ -216,20 +210,22 @@ export default class App extends Component {
     return (
       <div className='App'>
         <Nav
-          loggedIn={ this.state.loggedIn }
-          createUser={ this.createUser }
-          loginUser={ this.loginUser }
-          logoutUser={ this.logoutUser }
-          createPet={ this.createPet }
-          getMyPets={ this.getMyPets }
+          loggedIn={this.state.loggedIn}
+          createUser={this.createUser}
+          loginUser={this.loginUser}
+          logoutUser={this.logoutUser}
+          createPet={this.createPet}
+          getPets={this.getPets}
+          getMyPets={this.getMyPets}
         />
         <Body
-          pets={ this.state.pets }
-          showPet={ this.state.showPet }
-          loggedIn={ this.state.loggedIn }
-          currentUserId={ this.state.currentUserId }
-          getPet={ this.getPet }
-          editPet={ this.editPet }
+          pets={this.state.pets}
+          showPet={this.state.showPet}
+          loggedIn={this.state.loggedIn}
+          currentUserId={ this.state.currentUserId}
+          getPet={this.getPet}
+          updatePet={this.updatePet}
+          deletePet={this.deletePet}
         />
       </div>
     )
