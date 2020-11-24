@@ -5,7 +5,7 @@ export default function PetCard(props) {
 
   const pets = props.pets.map(pet => {
     return (
-      <Card key={pet.id} onClick={() => props.getPet(pet.id)}>
+      <Card key={pet.id} raised={true} color={'blue'} onClick={() => props.getPet(pet.id)}>
         <Image src={pet.photo} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{pet.petName}</Card.Header>
