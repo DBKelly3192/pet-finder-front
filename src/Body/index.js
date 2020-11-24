@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PetContainer from '../PetContainer'
-import EditPetForm from '../EditPetForm'
+import ShowPet from '../ShowPet'
+// import EditPetForm from '../EditPetForm'
 
 export default class Body extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      displayEditPetForm: false,
-      petIdToEdit: -1
+      displayEditPetForm: false
     }
   }
 
@@ -23,17 +23,15 @@ export default class Body extends Component {
     return (
       <React.Fragment>
         {
-          this.state.displayEditPetForm
-          ? <EditPetForm
+          this.props.showPet
+          ? <ShowPet
               pets={ this.props.pets }
-              petIdToEdit={ this.state.petIdToEdit }
-              displayEditPetForm={ this.state.displayEditPetForm }
-              toggleEditPetForm={ this.toggleEditPetForm }
-              editPet={ this.props.editPet }
+              currentUserId={ this.props.currentUserId }
             />
           : <PetContainer
               pets={ this.props.pets }
               loggedIn={ this.props.loggedIn }
+              getPet={ this.props.getPet }
               toggleEditPetForm={ this.toggleEditPetForm }
             />
         }
@@ -41,3 +39,11 @@ export default class Body extends Component {
     )
   }
 }
+
+// <EditPetForm
+//     pets={ this.props.pets }
+//     petIdToEdit={ this.state.petIdToEdit }
+//     displayEditPetForm={ this.state.displayEditPetForm }
+//     toggleEditPetForm={ this.toggleEditPetForm }
+//     editPet={ this.props.editPet }
+//   />

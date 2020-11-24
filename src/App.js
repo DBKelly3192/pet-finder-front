@@ -9,7 +9,9 @@ export default class App extends Component {
 
     this.state = {
       loggedIn: false,
-      pets: []
+      pets: [],
+      showPet: false,
+      currentUserId: ''
     }
   }
 
@@ -33,7 +35,30 @@ export default class App extends Component {
       console.log(this.state.pets)
 
     } catch(err) {
-      console.log("Error getting dog data.", err)
+      console.log("ERROR RETRIEVING PET DATA.", err)
+    }
+  }
+
+  getPet = async (idOfPet) => {
+    try {
+
+      const url = process.env.REACT_APP_API_URL + "/api/v1/pets/" + idOfPet
+      // const url = "http://localhost:8000/api/v1/pets/"
+      console.log(url)
+
+      const petResponse = await fetch(url)
+
+      const petJson = await petResponse.json()
+
+      this.setState({
+        pets: petJson.data,
+        showPet: !this.state.showPet
+      })
+
+      console.log(this.state.pets)
+
+    } catch(err) {
+      console.log("ERROR RETRIEVING PET DATA.", err)
     }
   }
 
@@ -49,7 +74,8 @@ export default class App extends Component {
       const petsJson = await petsResponse.json()
 
       this.setState({
-        pets: petsJson.data
+        pets: petsJson.data,
+        showPet: !this.state.showPet
       })
 
       console.log(this.state.pets)
@@ -110,11 +136,13 @@ export default class App extends Component {
       const loginUserJson = await loginUserResponse.json()
 
       console.log(loginUserJson)
+      console.log(loginUserJson.data.id)
 
       if (loginUserResponse.status === 200 || loginUserResponse.status === 201) {
         console.log('USER LOGGED IN')
         this.setState({
-          loggedIn: !this.state.loggedIn
+          loggedIn: !this.state.loggedIn,
+          currentUserId: loginUserJson.data.id
         })
       }
       this.getPets()
@@ -184,11 +212,6 @@ export default class App extends Component {
     }
   }
 
-  editPet = async (petToEdit) => {
-    console.log('Hell Yeah!')
-    console.log('Pet to edit, ', petToEdit)
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -202,7 +225,10 @@ export default class App extends Component {
         />
         <Body
           pets={ this.state.pets }
+          showPet={ this.state.showPet }
           loggedIn={ this.state.loggedIn }
+          currentUserId={ this.state.currentUserId }
+          getPet={ this.getPet }
           editPet={ this.editPet }
         />
       </React.Fragment>

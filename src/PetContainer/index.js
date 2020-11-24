@@ -6,6 +6,7 @@ export default function PetContainer(props) {
     <PetCard
       pets={ props.pets }
       loggedIn={ props.loggedIn }
+      getPet={ props.getPet }
       toggleEditPetForm={ props.toggleEditPetForm }
     />
   )
