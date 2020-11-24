@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Header, Image, Input, Label, Modal } from 'semantic-ui-react'
+import { Button, Form, Header, Image, Label, Modal } from 'semantic-ui-react'
 
 export default class NewPetForm extends Component {
   constructor(props) {
