@@ -178,7 +178,7 @@ export default class App extends Component {
           pets: [...this.state.pets, createPetJson.data]
         })
       }
-      this.getPets()
+      this.getMyPets()
     } catch(err) {
       console.log('ERROR CREATING PET', err)
     }
