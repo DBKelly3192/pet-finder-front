@@ -47,7 +47,7 @@ export default class Nav extends Component {
             :
             <React.Fragment>
               <Menu.Item icon='sign-in' name='Log In' position='right' onClick={this.toggleLoginUserForm}/>
-              <Menu.Item icon='address card outline' name='Register' position='right' onClick={this.toggleRegisterUserForm}/>
+              <Menu.Item icon='address card outline' name='Register' onClick={this.toggleRegisterUserForm}/>
             </React.Fragment>
         }
         {
