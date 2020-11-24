@@ -87,7 +87,6 @@ export default class App extends Component {
   }
 
   loginUser = async (userToLogin) => {
-    console.log(userToLogin)
     try {
       const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
       const loginUserResponse = await fetch(url, {

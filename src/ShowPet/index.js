@@ -20,7 +20,7 @@ export default class ShowPet extends Component {
   render() {
     return (
       <React.Fragment>
-        <Card key={this.props.pets.id} centered={true}>
+        <Card key={this.props.pets.id}  raised={true} color={'blue'} centered={true}>
           <Image src={this.props.pets.photo} wrapped ui={false} />
           <Card.Content>
             <Card.Header>{this.props.pets.petName}</Card.Header>

@@ -55,7 +55,7 @@ export default class LoginUserForm extends Component {
               <Grid.Column>
                 <Label>Password:</Label>
                 <Input
-                  type="text"
+                  type="password"
                   name="password"
                   value={this.state.password}
                   placeholder="Enter your password"
