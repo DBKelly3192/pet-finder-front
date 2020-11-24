@@ -152,7 +152,7 @@ export default class App extends Component {
   createPet = async (petToCreate) => {
     console.log(petToCreate)
     try {
-      const url = process.env.REACT_APP_API_URL + '/api/v1/pets'
+      const url = process.env.REACT_APP_API_URL + '/api/v1/pets/'
 
       console.log(url)
       console.log(JSON.stringify(petToCreate))
